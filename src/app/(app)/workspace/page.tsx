@@ -50,7 +50,7 @@ export default async function Workspace() {
             <div>bru</div>
           </div>
 
-          <div className="flex h-17 w-full shrink-0 justify-center bg-red-400 py-1">
+          <div className="flex h-17 w-full shrink-0 justify-center">
             <ProfileButton />
           </div>
         </div>
