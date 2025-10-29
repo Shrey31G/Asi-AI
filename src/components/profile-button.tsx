@@ -14,7 +14,7 @@ export default function ProfileButton() {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <div className="hover:bg-muted flex w-full cursor-pointer items-center justify-between gap-2 rounded-xl px-2 py-2">
+          <div className="hover:bg-background flex w-full cursor-pointer items-center justify-between gap-4 rounded-2xl px-2 py-2">
             <div className="bg-foreground text-background flex size-10 items-center justify-center rounded-full font-semibold">
               B
             </div>
