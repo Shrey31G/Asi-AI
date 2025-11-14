@@ -1,5 +1,6 @@
 "use client";
 
+import { signOut } from "next-auth/react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,7 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 
-export default function ProfileButton() {
+export default function ProfileButton({ user }: any) {
   return (
     <>
       <DropdownMenu>
@@ -19,9 +20,9 @@ export default function ProfileButton() {
               B
             </div>
             <div className="min-w-0 flex-1 px-1 text-left">
-              <p className="truncate text-sm font-medium">Bharat Singh</p>
+              <p className="truncate text-sm font-medium">{user.name}</p>
               <p className="text-muted-foreground truncate text-xs">
-                bharat@example.com
+                {user.email}
               </p>
             </div>
           </div>
@@ -31,14 +32,17 @@ export default function ProfileButton() {
           className="w-[var(--radix-dropdown-menu-trigger-width)]"
           align="center"
         >
-          <DropdownMenuItem disabled>shrey.route88@gmail.com</DropdownMenuItem>
+          <DropdownMenuItem disabled>{user.email}</DropdownMenuItem>
 
           <DropdownMenuItem className="cursor-pointer">
             Settings
           </DropdownMenuItem>
 
           <DropdownMenuSeparator />
-          <DropdownMenuItem className="cursor-pointer">
+          <DropdownMenuItem
+            onClick={() => signOut({ callbackUrl: "/" })}
+            className="cursor-pointer"
+          >
             Log Out
           </DropdownMenuItem>
         </DropdownMenuContent>
