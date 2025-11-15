@@ -13,8 +13,11 @@ export async function POST(req: Request) {
 
     const result = streamText({
         model: google('gemma-3-27b-it'),
-        system: 'You are a very strict professor',
-        messages: convertToModelMessages(messages)
+        system: 'You are a private assistant who does all the work professionally',
+        messages: convertToModelMessages(messages),
+        onError({ error }) {
+            console.log(error)
+        }
     })
     console.log("The AI replied:", result)
     return result.toUIMessageStreamResponse();

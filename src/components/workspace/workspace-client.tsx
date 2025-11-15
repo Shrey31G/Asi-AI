@@ -5,6 +5,8 @@ import ProfileButton from "../profile-button";
 import { useChat } from "@ai-sdk/react";
 import { useState, useRef, useEffect } from "react";
 import { Button } from "../ui/button";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 interface WorkspaceClientProps {
   user?: any;
@@ -88,10 +90,12 @@ export default function WorkspaceClient({ user }: WorkspaceClientProps) {
                     {messages.map((message, i) => (
                       <div key={i} className="flex w-full">
                         {message.role === "user" ? (
-                          <div className="dark:bg-background3 ml-auto max-w-[80%] rounded-md bg-neutral-100 p-2 break-words whitespace-pre-wrap">
+                          <div className="ml-auto max-w-[80%] rounded-md bg-neutral-100 p-2 break-words whitespace-pre-wrap dark:bg-neutral-600">
                             {message.parts.map((part, index) =>
                               part.type === "text" ? (
-                                <span key={index}>{part.text}</span>
+                                <span key={index}>
+                                  <ReactMarkdown>{part.text}</ReactMarkdown>
+                                </span>
                               ) : null,
                             )}
                           </div>
@@ -99,7 +103,11 @@ export default function WorkspaceClient({ user }: WorkspaceClientProps) {
                           <div className="rounded-md p-2 break-words whitespace-pre-wrap">
                             {message.parts.map((part, index) =>
                               part.type === "text" ? (
-                                <span key={index}>{part.text}</span>
+                                <span key={index}>
+                                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                                    {part.text}
+                                  </ReactMarkdown>
+                                </span>
                               ) : null,
                             )}
                           </div>
@@ -144,7 +152,7 @@ function InputForm({ input, sendMessage, setInput, status }: InputFormTypes) {
 
   return (
     <div className="mx-auto mb-4 w-full max-w-4xl flex-shrink-0">
-      <div className="bg-background flex items-end gap-2 rounded-3xl border-2 py-2 pr-2 pl-4 dark:border-neutral-800">
+      <div className="bg-background flex items-center gap-2 rounded-3xl border-2 py-2 pr-2 pl-4 dark:border-neutral-800">
         <textarea
           ref={textareaRef}
           value={input}
