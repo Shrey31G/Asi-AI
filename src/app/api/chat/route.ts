@@ -19,6 +19,9 @@ export async function POST(req: Request) {
             console.log(error)
         }
     })
+    setTimeout(() => {
+
+    }, 3000)
     console.log("The AI replied:", result)
     return result.toUIMessageStreamResponse();
 }

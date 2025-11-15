@@ -90,7 +90,7 @@ export default function WorkspaceClient({ user }: WorkspaceClientProps) {
                     {messages.map((message, i) => (
                       <div key={i} className="flex w-full">
                         {message.role === "user" ? (
-                          <div className="ml-auto max-w-[80%] rounded-md bg-neutral-100 p-2 break-words whitespace-pre-wrap dark:bg-neutral-600">
+                          <div className="ml-auto max-w-[80%] rounded-md bg-neutral-100 p-2 break-words dark:bg-neutral-600">
                             {message.parts.map((part, index) =>
                               part.type === "text" ? (
                                 <span key={index}>
@@ -100,7 +100,13 @@ export default function WorkspaceClient({ user }: WorkspaceClientProps) {
                             )}
                           </div>
                         ) : (
-                          <div className="rounded-md p-2 break-words whitespace-pre-wrap">
+                          <div className="prose prose-neutral dark:prose-invert max-w-none rounded-md p-2 break-words">
+                            {status === "streaming" && (
+                              <div className="flex items-center gap-2 text-sm text-neutral-500">
+                                <div className="h-4 w-4 animate-spin rounded-full border-2 border-neutral-300 border-t-neutral-600" />
+                                Thinking...
+                              </div>
+                            )}
                             {message.parts.map((part, index) =>
                               part.type === "text" ? (
                                 <span key={index}>
